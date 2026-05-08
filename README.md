@@ -6,6 +6,13 @@ The project includes procedural animation, segmented body movement, camera contr
 
 ---
 
+# Setup & Dependencies
+
+This project uses several third-party libraries for OpenGL rendering, math, window management, and image loading.  
+To build and run the project correctly in Visual Studio, make sure all libraries are installed and all dependencies are configured properly.
+
+---
+
 ## Required Libraries
 
 The project uses:
@@ -15,7 +22,6 @@ The project uses:
 - **GLM** – mathematics library for vectors, matrices, transformations  
 - **SOIL** (Simple OpenGL Image Library) – texture/image loading
 
-All required libraries are already included inside the includes/ directory.
 
 ## Project Structure
 
