@@ -1,7 +1,8 @@
-# Setup & Dependencies
+# VisualizationEngine
 
-This project uses several third-party libraries for OpenGL rendering, math, window management, and image loading.  
-To build and run the project correctly in Visual Studio, make sure all dependencies are configured properly.
+OpenGL-based visualization project for simulating and rendering CPG (Central Pattern Generator) driven lamprey movement.
+
+The project includes procedural animation, segmented body movement, camera controls, shaders, and basic lighting.
 
 ---
 
@@ -14,6 +15,7 @@ The project uses:
 - **GLM** – mathematics library for vectors, matrices, transformations  
 - **SOIL** (Simple OpenGL Image Library) – texture/image loading
 
+All required libraries are already included inside the includes/ directory
 ---
 
 ## Project Structure
