@@ -15,8 +15,7 @@ The project uses:
 - **GLM** – mathematics library for vectors, matrices, transformations  
 - **SOIL** (Simple OpenGL Image Library) – texture/image loading
 
-All required libraries are already included inside the includes/ directory
----
+All required libraries are already included inside the includes/ directory.
 
 ## Project Structure
 
