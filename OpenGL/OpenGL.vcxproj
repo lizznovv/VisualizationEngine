@@ -105,12 +105,12 @@
       <PreprocessorDefinitions>_DEBUG;_CONSOLE;%(PreprocessorDefinitions);_CRT_SECURE_NO_WARNINGS</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
       <LanguageStandard>stdcpp20</LanguageStandard>
-      <AdditionalIncludeDirectories>C:\Users\lizan\C++\glfw-3.4.bin.WIN64\glfw-3.4.bin.WIN64\include;C:\Users\lizan\C++\glad\include;C:\Users\lizan\C++\repos\OpenGL\includes\glm;C:\Users\lizan\C++\repos\SOIL\SOIL</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>D:\VisualizationEngine\includes\SOIL\SOIL;D:\VisualizationEngine\includes\glm;D:\VisualizationEngine\includes\glfw-3.4.bin.WIN64\glfw-3.4.bin.WIN64\include;D:\VisualizationEngine\includes\glad\include</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
-      <AdditionalLibraryDirectories>C:\Users\lizan\C++\glfw-3.4.bin.WIN64\glfw-3.4.bin.WIN64\lib-vc2022</AdditionalLibraryDirectories>
+      <AdditionalLibraryDirectories>D:\VisualizationEngine\includes\glfw-3.4.bin.WIN64\glfw-3.4.bin.WIN64\lib-vc2022</AdditionalLibraryDirectories>
       <AdditionalDependencies>glfw3.lib;opengl32.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
@@ -130,11 +130,11 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="..\..\..\glad\src\glad.c" />
-    <ClCompile Include="..\..\..\Simple-OpenGL-Image-Library-master\Simple-OpenGL-Image-Library-master\src\image_DXT.c" />
-    <ClCompile Include="..\..\..\Simple-OpenGL-Image-Library-master\Simple-OpenGL-Image-Library-master\src\image_helper.c" />
-    <ClCompile Include="..\..\..\Simple-OpenGL-Image-Library-master\Simple-OpenGL-Image-Library-master\src\SOIL.c" />
-    <ClCompile Include="..\..\..\Simple-OpenGL-Image-Library-master\Simple-OpenGL-Image-Library-master\src\stb_image_aug.c" />
+    <ClCompile Include="..\includes\glad\src\glad.c" />
+    <ClCompile Include="..\includes\SOIL\SOIL\image_DXT.c" />
+    <ClCompile Include="..\includes\SOIL\SOIL\image_helper.c" />
+    <ClCompile Include="..\includes\SOIL\SOIL\SOIL.c" />
+    <ClCompile Include="..\includes\SOIL\SOIL\stb_image_aug.c" />
     <ClCompile Include="CPG.h" />
     <ClCompile Include="OpenGL.cpp" />
   </ItemGroup>
@@ -145,10 +145,6 @@
     <None Include="vertex_light.glsl" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="..\..\..\Simple-OpenGL-Image-Library-master\Simple-OpenGL-Image-Library-master\src\SOIL.h" />
-    <ClInclude Include="..\..\..\Simple-OpenGL-Image-Library-master\Simple-OpenGL-Image-Library-master\src\stbi_DDS_aug.h" />
-    <ClInclude Include="..\..\..\Simple-OpenGL-Image-Library-master\Simple-OpenGL-Image-Library-master\src\stbi_DDS_aug_c.h" />
-    <ClInclude Include="..\..\..\Simple-OpenGL-Image-Library-master\Simple-OpenGL-Image-Library-master\src\stb_image_aug.h" />
     <ClInclude Include="CameraClass.h" />
     <ClInclude Include="Lamprey.h" />
     <ClInclude Include="Shader.h" />

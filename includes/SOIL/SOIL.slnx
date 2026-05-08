@@ -1,0 +1,7 @@
+<Solution>
+  <Configurations>
+    <Platform Name="x64" />
+    <Platform Name="x86" />
+  </Configurations>
+  <Project Path="SOIL/SOIL.vcxproj" Id="e21ca10d-92c8-44df-9475-56d2c39244ec" />
+</Solution>
