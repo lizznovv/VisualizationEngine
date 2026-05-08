@@ -238,18 +238,20 @@ int main() {
     //включаем проверку глубины
     glEnable(GL_DEPTH_TEST);
 
-    glm::vec3 cubePositions[] = {
-        glm::vec3(0.0f,  0.0f,  0.0f),
-        glm::vec3(2.0f,  5.0f, -15.0f),
-        glm::vec3(-1.5f, -2.2f, -2.5f),
-        glm::vec3(-3.8f, -2.0f, -12.3f),
-        glm::vec3(2.4f, -0.4f, -3.5f),
-        glm::vec3(-1.7f,  3.0f, -7.5f),
-        glm::vec3(1.3f, -2.0f, -2.5f),
-        glm::vec3(1.5f,  2.0f, -2.5f),
-        glm::vec3(1.5f,  0.2f, -1.5f),
-        glm::vec3(-1.3f,  1.0f, -1.5f)
-    };
+    glm::vec3 floorPosition = glm::vec3(0.0f, 0.0f, 0.0f);
+
+    //glm::vec3 cubePositions[] = {
+    //    glm::vec3(0.0f,  0.0f,  0.0f),
+    //    glm::vec3(2.0f,  5.0f, -15.0f),
+    //    glm::vec3(-1.5f, -2.2f, -2.5f),
+    //    glm::vec3(-3.8f, -2.0f, -12.3f),
+    //    glm::vec3(2.4f, -0.4f, -3.5f),
+    //    glm::vec3(-1.7f,  3.0f, -7.5f),
+    //    glm::vec3(1.3f, -2.0f, -2.5f),
+    //    glm::vec3(1.5f,  2.0f, -2.5f),
+    //    glm::vec3(1.5f,  0.2f, -1.5f),
+    //    glm::vec3(-1.3f,  1.0f, -1.5f)
+    //};
     
     //считываем из шейдера объекта
     GLint modelLoc = glGetUniformLocation(shader->Program, "model");
@@ -258,6 +260,7 @@ int main() {
     GLint objectColorLoc = glGetUniformLocation(shader->Program, "objectColor");
     GLint lightColorLoc = glGetUniformLocation(shader->Program, "lightColor");
     GLint lightPosLoc = glGetUniformLocation(shader->Program, "lightPos");
+    GLint viewPosLoc = glGetUniformLocation(shader->Program, "viewPos");
 
 
     //считываем из шейдера освещения
@@ -324,6 +327,7 @@ int main() {
         glUniformMatrix4fv(viewLoc, 1, GL_FALSE, glm::value_ptr(view));
         glUniformMatrix4fv(projectionLoc, 1, GL_FALSE, glm::value_ptr(projection));
         glUniform3f(lightPosLoc, lightPos.x, lightPos.y, lightPos.z);
+        glUniform3f(viewPosLoc, camera->GetCameraPos().x, camera->GetCameraPos().y, camera->GetCameraPos().z);
 
         //// Обновляем цвет формы
         //GLfloat timeValue = glfwGetTime();
@@ -342,7 +346,12 @@ int main() {
         lamprey.angles = cpg.getAngles();
         lamprey.drawSegments(modelLoc);
 
-        
+        glm::mat4 floorModel;
+        floorModel = glm::translate(floorModel, floorPosition);
+
+        glUniformMatrix4fv(modelLoc, 1, GL_FALSE, glm::value_ptr(floorModel));
+        glDrawArrays(GL_TRIANGLES, 0, 36);
+
 
         ////10 одинаковых кубов с разными мировыми координатами
         //for (GLuint i = 0; i < 10; i++)

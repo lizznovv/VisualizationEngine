@@ -24,6 +24,10 @@ public:
 		return glm::lookAt(this->cameraPos, this->cameraPos + this->cameraFront, this->cameraUp);
 	}
 
+	glm::vec3 GetCameraPos() {
+		return cameraPos;
+	}
+
 	GLfloat GetFov() {
 		return fov;
 	}
