@@ -16,11 +16,23 @@ To build and run the project correctly in Visual Studio, make sure all libraries
 ## Required Libraries
 
 The project uses:
+### **GLFW (v3.3+)**
+*   **Purpose:** Window creation and input event handling.
+*   **Official Site:** [glfw.org](https://www.glfw.org/)
 
-- **GLFW** – window creation and input handling  
-- **GLAD** – OpenGL function loader  
-- **GLM** – mathematics library for vectors, matrices, transformations  
-- **SOIL** (Simple OpenGL Image Library) – texture/image loading
+###  **GLAD**
+*   **Purpose:** Multi-Language GL Loader (OpenGL 3.3 Core Profile).
+*   **Note:** The `glad.c` file **must** be compiled as part of your source files.
+
+### **GLM (OpenGL Mathematics)** 
+*Version 0.9.9+ Recommended*
+
+###  **stb_image.h**
+*   **Purpose:** Header-only library for texture loading.
+*   **Implementation:** Ensure `#define STB_IMAGE_IMPLEMENTATION` is included in your main `.cpp` file.
+
+---
+
 
 
 ## Project Structure
@@ -29,15 +41,10 @@ The project uses:
 VisualizationEngine/
 │── OpenGL/
 │   ├── OpenGL.cpp
-│   ├── glad.c
-│   ├── SOIL.c
-│   ├── image_DXT.c
-│   ├── image_helper.c
-│   ├── stb_image_aug.c
 │   └── shaders...
 │
 │── includes/
 │   ├── glad/
 │   ├── GLFW/
 │   ├── glm/
-│   └── SOIL/
+│   └── stb_image.h
