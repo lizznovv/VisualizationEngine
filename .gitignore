@@ -361,6 +361,5 @@ MigrationBackup/
 
 # Fody - auto-generated XML schema
 FodyWeavers.xsd
-/includes/glad
-/includes/glfw-3.4.bin.WIN64/glfw-3.4.bin.WIN64
+/includes/
 /Текстовый документ.txt

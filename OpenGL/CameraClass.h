@@ -45,7 +45,7 @@ public:
 		if (this->pitch < -89.0f)
 			this->pitch = -89.0f;
 
-		glm::vec3 front;
+		glm::vec3 front = glm::vec3(1.0f);;
 		front.x = cos(glm::radians(this->yaw)) * cos(glm::radians(this->pitch));
 		front.y = sin(glm::radians(this->pitch));
 		front.z = sin(glm::radians(this->yaw)) * cos(glm::radians(this->pitch));

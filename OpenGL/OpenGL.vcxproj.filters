@@ -18,23 +18,11 @@
     <ClCompile Include="OpenGL.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\..\glad\src\glad.c">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\..\Simple-OpenGL-Image-Library-master\Simple-OpenGL-Image-Library-master\src\image_DXT.c">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\..\Simple-OpenGL-Image-Library-master\Simple-OpenGL-Image-Library-master\src\image_helper.c">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\..\Simple-OpenGL-Image-Library-master\Simple-OpenGL-Image-Library-master\src\SOIL.c">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\..\Simple-OpenGL-Image-Library-master\Simple-OpenGL-Image-Library-master\src\stb_image_aug.c">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="CPG.h">
       <Filter>Header Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\includes\glad\src\glad.c">
+      <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -44,26 +32,14 @@
     <None Include="shaders\fragment.glsl">
       <Filter>Source Files</Filter>
     </None>
-    <None Include="fragment_light.glsl">
+    <None Include="shaders\fragment_light.glsl">
       <Filter>Source Files</Filter>
     </None>
-    <None Include="vertex_light.glsl">
+    <None Include="shaders\vertex_light.glsl">
       <Filter>Source Files</Filter>
     </None>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="..\..\..\Simple-OpenGL-Image-Library-master\Simple-OpenGL-Image-Library-master\src\SOIL.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\Simple-OpenGL-Image-Library-master\Simple-OpenGL-Image-Library-master\src\stb_image_aug.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\Simple-OpenGL-Image-Library-master\Simple-OpenGL-Image-Library-master\src\stbi_DDS_aug.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\Simple-OpenGL-Image-Library-master\Simple-OpenGL-Image-Library-master\src\stbi_DDS_aug_c.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="CameraClass.h">
       <Filter>Header Files</Filter>
     </ClInclude>

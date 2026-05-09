@@ -8,7 +8,10 @@
 #include <glm/glm.hpp>
 #include <glm/gtc/matrix_transform.hpp>
 #include <glm/gtc/type_ptr.hpp>
-#include <SOIL.h>
+
+#define STB_IMAGE_IMPLEMENTATION
+#include "stb_image.h"
+
 #include "CameraClass.h"
 #include "Shader.h"
 #include "Lamprey.h"
@@ -181,7 +184,6 @@ int main() {
     GLuint EBO;
     glGenBuffers(1, &EBO);
 
-
     //создаем vao
     GLuint VAO;
     glGenVertexArrays(1, &VAO);
@@ -206,8 +208,17 @@ int main() {
     glBindTexture(GL_TEXTURE_2D, texture);
 
     //загружаем картинку
-    int width2, height2;
-    unsigned char* image = SOIL_load_image("C:\\Users\\lizan\\C++\\repos\\OpenGL\\OpenGL\\textures\\images.jpg", &width2, &height2, 0, SOIL_LOAD_RGB);
+    int width2, height2, channels;
+
+    stbi_set_flip_vertically_on_load(true);
+
+    unsigned char* image = stbi_load(
+        "textures/images.jpg",
+        &width2,
+        &height2,
+        &channels,
+        STBI_rgb
+    );
     if (!image)
         std::cout << "Failed to load texture\n";
 
@@ -224,7 +235,7 @@ int main() {
     // Атрибут с координатами
     glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 6 * sizeof(GLfloat), (GLvoid*)0);
     glEnableVertexAttribArray(0);
-    //  Атрибут с текстурой
+    //  Атрибут нормали
     glVertexAttribPointer(1, 3, GL_FLOAT, GL_FALSE, 6 * sizeof(GLfloat), (GLvoid*)(3 * sizeof(GLfloat)));
     glEnableVertexAttribArray(1);
 
@@ -232,13 +243,11 @@ int main() {
     glBindVertexArray(0);
 
     //освобождение памяти и отвязка текстур
-    SOIL_free_image_data(image);
+    stbi_image_free(image);
     glBindTexture(GL_TEXTURE_2D, 0);
    
     //включаем проверку глубины
     glEnable(GL_DEPTH_TEST);
-
-    glm::vec3 floorPosition = glm::vec3(0.0f, 0.0f, 0.0f);
 
     //glm::vec3 cubePositions[] = {
     //    glm::vec3(0.0f,  0.0f,  0.0f),
@@ -283,7 +292,7 @@ int main() {
   //до тех пор пока не скажем GLFW остановиться
     while (!glfwWindowShouldClose(window)) {
         
-        glClearColor(0.2f, 0.3f, 0.3f, 1.0f);
+        glClearColor(0.1f, 0.1f, 0.3f, 1.0f);
         glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
         //время, затраченное на визуализацию последнего выведенного кадра
@@ -291,22 +300,28 @@ int main() {
         deltaTime = currentFrame - lastFrame;
         lastFrame = currentFrame;
 
-        glm::mat4 trans;        //создаем матрицу трансформации
-        glm::mat4 view;        //матрица вида
+        glm::mat4 trans = glm::mat4(1.0f);;       //создаем матрицу трансформации
+        glm::mat4 view = glm::mat4(1.0f);        //матрица вида
         view = camera->GetViewMatrix();
-        glm::mat4 projection;        //матрица перспективной проекции
+        glm::mat4 projection = glm::mat4(1.0f);        //матрица перспективной проекции
         projection = glm::perspective(camera->GetFov(), (float)width / (float)height, 0.1f, 100.0f);
 
-        // Активируем шейдерную программу освещения
-        light_shader->Use();
-
         // создаем матрицу модели для лампы
-        glm::mat4 lightModel;
-        glm::vec3 lightPos(1.2f, 1.0f, 2.0f);
+        glm::mat4 lightModel = glm::mat4(1.0f);;
+        glm::vec3 lightPos(1.2f, 10.0f, 5.0f);
 
-        lightModel = glm::mat4();
+        lightModel = glm::mat4(1.0f);
         lightModel = glm::translate(lightModel, lightPos);
         lightModel = glm::scale(lightModel, glm::vec3(0.2f));
+
+        // создаем матрицу модели для пола
+        glm::mat4 floorModel = glm::mat4(1.0f);
+        floorModel = glm::translate(floorModel, glm::vec3(0.0f, -2.0f, 0.0f));
+        floorModel = glm::scale(floorModel, glm::vec3(500.0f, 0.2f, 500.0f));
+
+       
+        // Активируем шейдерную программу освещения
+        light_shader->Use();
 
         glUniformMatrix4fv(lightModelLoc, 1, GL_FALSE, glm::value_ptr(lightModel));
         glUniformMatrix4fv(lightViewLoc, 1, GL_FALSE, glm::value_ptr(view));
@@ -320,15 +335,24 @@ int main() {
         // Активируем шейдерную программу объекта
         shader->Use();
 
-        glUniform3f(objectColorLoc, 1.0f, 0.5f, 0.31f);
-        glUniform3f(lightColorLoc, 1.0f, 1.0f, 1.0f);
-
-        //передаем матрицы в шейдер
         glUniformMatrix4fv(viewLoc, 1, GL_FALSE, glm::value_ptr(view));
         glUniformMatrix4fv(projectionLoc, 1, GL_FALSE, glm::value_ptr(projection));
         glUniform3f(lightPosLoc, lightPos.x, lightPos.y, lightPos.z);
         glUniform3f(viewPosLoc, camera->GetCameraPos().x, camera->GetCameraPos().y, camera->GetCameraPos().z);
 
+        glUniform3f(lightColorLoc, 1.0f, 1.0f, 1.0f);
+
+
+        //передаем матрицы пола в шейдер
+        glUniform3f(objectColorLoc, 0.136f, 0.1f, 0.452f);
+        glUniformMatrix4fv(modelLoc, 1, GL_FALSE, glm::value_ptr(floorModel));
+
+        glBindVertexArray(VAO);
+        glDrawArrays(GL_TRIANGLES, 0, 36);
+
+
+        //передаем матрицы объекта в шейдер
+        glUniform3f(objectColorLoc, 0.5f, 0.5f, 0.5f);
         //// Обновляем цвет формы
         //GLfloat timeValue = glfwGetTime();
         //GLfloat greenValue = (sin(timeValue) / 2) + 0.5;
@@ -338,7 +362,6 @@ int main() {
         glBindTexture(GL_TEXTURE_2D, texture);
         glBindVertexArray(VAO);
 
-
         float time = glfwGetTime();
 
         //вызываем апдейт и отрисовку сегментов
@@ -346,13 +369,7 @@ int main() {
         lamprey.angles = cpg.getAngles();
         lamprey.drawSegments(modelLoc);
 
-        glm::mat4 floorModel;
-        floorModel = glm::translate(floorModel, floorPosition);
-
-        glUniformMatrix4fv(modelLoc, 1, GL_FALSE, glm::value_ptr(floorModel));
-        glDrawArrays(GL_TRIANGLES, 0, 36);
-
-
+        
         ////10 одинаковых кубов с разными мировыми координатами
         //for (GLuint i = 0; i < 10; i++)
         //{

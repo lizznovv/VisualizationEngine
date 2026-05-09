@@ -9,7 +9,6 @@
 #include <glm/glm.hpp>
 #include <glm/gtc/matrix_transform.hpp>
 #include <glm/gtc/type_ptr.hpp>
-#include <SOIL.h>
 
 class Lamprey {
 
@@ -36,7 +35,7 @@ public:
 
 		for (int i = 0; i < N; i++)
 		{
-			model = model * glm::rotate(glm::mat4(1.0f), angles[i], glm::vec3(0, 0, 1));
+			model = model * glm::rotate(glm::mat4(1.0f), glm::radians(angles[i]), glm::vec3(0, 0, 1));
 			model = model * glm::translate(glm::mat4(1.0f), glm::vec3(length, 0, 0));
 
 			glUniformMatrix4fv(modelLoc, 1, GL_FALSE, glm::value_ptr(model));
